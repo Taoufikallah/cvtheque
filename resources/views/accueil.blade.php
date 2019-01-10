@@ -5,7 +5,7 @@
 @section('content')
 
 
-<h1>la vue accueil</h1>
+<h1>la page D'accueil</h1>
 
 <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
