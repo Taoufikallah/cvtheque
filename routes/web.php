@@ -15,17 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::get('accueil', function() {
-    return view('accueil');
-});
+Route::get('cvs', 'CvController@index');
+Route::get('cvs/create', 'CvController@create');
+Route::post('cvs', 'CvController@store');
 
-route::get('service', function() {
-    return view('service');
-});
+Route::get('cvs/{id}/edit', 'CvController@edit');
+Route::put('cvs/{id}','CvController@update');
+Route::delete('cvs/{id}', 'CvController@destroy');
 
-route::get('contact', function() {
-    return view('contact');
-});
 
 Auth::routes();
 
