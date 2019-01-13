@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\cv;
+use App\Cv;
 
 class CvController extends Controller
 {
     //lister les cvs
     public function index() {
-    
+        $listcv = Cv::all();
+
+        return view('cv.index', ['cvs' => $listcv]);
     }
     //Affiche le formulaire de creation de cv 
     public function create() {
@@ -24,6 +26,8 @@ class CvController extends Controller
         $cv->presentation = $request->input('presentation');
 
         $cv->save();
+        
+        return redirect('cvs');
     }
     //Permet de récuperer un cv puis de le mettre dans le formulaire
     public function edit() {
