@@ -10,7 +10,9 @@ class CvController extends Controller
 {
     //lister les cvs
     public function index() {
-    
+        $listcv = Cv::all();
+
+        return view('cv.index', ['cvs' => $listcv]);
     }
     //Affiche le formulaire de creation de cv 
     public function create() {
