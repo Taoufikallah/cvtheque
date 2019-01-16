@@ -21,7 +21,7 @@ Route::post('cvs', 'CvController@store');
 
 Route::get('cvs/{id}/edit', 'CvController@edit');
 Route::put('cvs/{id}','CvController@update');
-Route::delete('cvs/{id}', 'CvController@destroy');
+Route::get('cvs/{id}', 'CvController@destroy');
 
 
 Auth::routes();
