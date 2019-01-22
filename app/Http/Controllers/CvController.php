@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Cv;
 
+use Auth;
+
+use App\Http\Requests\cvRequest;
+
 class CvController extends Controller
 {
+    public function __construct() {
+
+        $this->middleware('auth');
+    }
     //lister les cvs
     public function index() {
-        $listcv = Cv::all();
+        $listcv = Auth::user()->cvs;
+        //$listcv = Cv::where('user_id', Auth::user()->id)->get();
 
         return view('cv.index', ['cvs' => $listcv]);
     }
@@ -19,14 +28,17 @@ class CvController extends Controller
         return view('cv.create');
     }
     //Enregister un cv
-    public function store(Request $request) {
+    public function store(cvRequest $request) {
         $cv = new Cv();
 
         $cv->titre = $request->input('titre');
         $cv->presentation = $request->input('presentation');
+        $cv->user_id = Auth::user()->id;
 
         $cv->save();
-        
+
+        session()->flash('success', 'Le cv à été bien enregistré !!');
+
         return redirect('cvs');
     }
     //Permet de récuperer un cv puis de le mettre dans le formulaire
@@ -36,7 +48,7 @@ class CvController extends Controller
         return view('cv.edit', ['cv' => $cv]);
     }
     //Permet de modifier un cv
-    public function update(Request $request, $id) {
+    public function update(cvRequest $request, $id) {
         $cv = Cv::find($id);
 
         $cv->titre = $request->input('titre');
