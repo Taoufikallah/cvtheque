@@ -5,6 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success')}}
+                </div>
+            @endif
             <h1>la liste de mes cv</h1>
                 <div class="float-right">
                     <a href="{{ url('cvs/create')}}" class="btn btn-success">Nouveau cv</a>
@@ -21,7 +26,7 @@
                 <body>
                     @foreach($cvs as $cv)
                     <tr>
-                        <td>{{ $cv->titre }}</td>
+                    <td>{{ $cv->titre }} <br> {{ $cv->user->name }}</td>
                         <td>{{ $cv->presentation }}</td>
                         <td>{{ $cv->created_at }}</td>
                         <td>
