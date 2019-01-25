@@ -28,6 +28,8 @@ class CvController extends Controller
         $cv->save();
         
         return redirect('cvs');
+
+        
     }
     //Permet de récuperer un cv puis de le mettre dans le formulaire
     public function edit($id) {
