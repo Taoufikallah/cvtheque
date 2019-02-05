@@ -5,46 +5,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            @if(session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success')}}
-                </div>
-            @endif
+           
             <h1>la liste de mes cv</h1>
                 <div class="float-right">
                     <a href="{{ url('cvs/create')}}" class="btn btn-success">Nouveau cv</a>
                 </div>
-            <table class="table">
-                <head>
-                    <tr>
-                        <th>Title</th>
-                        <th>Presentation</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </head>
-                <body>
+                <div class="row">
                     @foreach($cvs as $cv)
-                    <tr>
-                    <td>{{ $cv->titre }} <br> {{ $cv->user->name }}</td>
-                        <td>{{ $cv->presentation }}</td>
-                        <td>{{ $cv->created_at }}</td>
-                        <td>
-                            
-
-                        <form action="{{ url('cvs/'.$cv->id) }}" method="">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <a href="" class="btn btn-primary">Details</a>
-                            <a href="{{ url('cvs/'.$cv->id.'/edit') }}" class="btn btn-default">Editer</a>
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                            
-                        </td>
-                    </tr>
-                    @endforeach
-                </body>
-            </table>
+                        <div class="col-sm-6 col-md-4">
+                          <div class="thumbnail">
+                          <img src="{{ asset('storage/'.$cv->photo) }}" alt="..." class="img-responsive" width="304" height="236">
+                            <div class="caption">
+                            <h3>{{ $cv->titre }}</h3>
+                            <p>{{ $cv->presentation}}</p>
+                              <p>
+                                <a href="#" class="btn btn-primary" role="button">Show</a> 
+                              <a href="{{ url('cvs/'.$cv->id.'/edit')}}" class="btn btn-warning" role="button">Editer</a>
+                                <a href="#" class="btn btn-danger" role="button">Supprimer</a>
+                            </p>
+                            </div>
+                          </div>
+                        </div>
+                        @endforeach
+                      </div>
         </div>
     </div>
 </div>

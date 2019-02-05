@@ -25,7 +25,10 @@
                         <label for="">Presentation</label>
                         <textarea name="presentation" class="form-control"  cols="30" rows="10" value="{{ $cv->presentation}}"></textarea>
                     </div>
-
+                    <div class="form-group">
+                            <label for="">Image</label>
+                            <input class="form-control" type="file" name="photo">
+                        </div>
                     
     
                     <div class="form-group">

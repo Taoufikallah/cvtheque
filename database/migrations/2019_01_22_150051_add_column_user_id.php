@@ -15,7 +15,6 @@ class AddColumnUserId extends Migration
     {
         Schema::table('cvs', function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->after('id');
-
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Http\UploadedFile;
+
 use App\Cv;
 
 use Auth;
@@ -35,6 +37,10 @@ class CvController extends Controller
         $cv->presentation = $request->input('presentation');
         $cv->user_id = Auth::user()->id;
 
+        
+        if($request->hasFile('photo')) {
+            $cv->photo = $request->file('photo')->store('image','public');
+        }
         $cv->save();
 
         session()->flash('success', 'Le cv à été bien enregistré !!');
@@ -47,6 +53,8 @@ class CvController extends Controller
     public function edit($id) {
         $cv = Cv::find($id);
 
+        $this->authorize('update', $cv);
+
         return view('cv.edit', ['cv' => $cv]);
     }
     //Permet de modifier un cv
@@ -56,9 +64,15 @@ class CvController extends Controller
         $cv->titre = $request->input('titre');
         $cv->presentation = $request->input('presentation');
 
+        if($request->hasFile('photo')) {
+            $cv-> photo = $request->photo->store('image');
+        }
         $cv->save();
 
         return redirect('cvs');
+    }
+    public function show($id) {
+        return "Salam yusuf";
     }
     //Permet de supprimer un cv
     public function destroy(Request $request, $id) {
